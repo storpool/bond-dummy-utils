@@ -1,3 +1,5 @@
+#!/bin/bash
+
 . /etc/init.d/functions
 
 cd /etc/sysconfig/network-scripts
