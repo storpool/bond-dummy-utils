@@ -24,8 +24,8 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-PROGS=		ifup-dummy bond-dummy-add
-MANPAGES=	bond-dummy-add.8.gz
+PROGS=		ifup-dummy bond-dummy-add bond-dummy-enslave
+MANPAGES=	bond-dummy-add.8.gz bond-dummy-enslave.8.gz
 
 SBINDIR?=	/sbin
 SYSCONFDIR?=	/etc
@@ -71,7 +71,28 @@ install-bond-dummy-add:	bond-dummy-add bond-dummy-add.8.gz
 		${MKDIR_P} ${DESTDIR}${MAN8DIR}
 		${INSTALL_DATA} bond-dummy-add.8.gz ${DESTDIR}${MAN8DIR}/
 
-install:	install-ifup-dummy install-bond-dummy-add
+install-bond-dummy-enslave:	bond-dummy-enslave bond-dummy-enslave.8.gz
+		${MKDIR_P} ${DESTDIR}${SBINDIR}
+		${INSTALL_SCRIPT} bond-dummy-enslave ${DESTDIR}${SBINDIR}/
+
+		${MKDIR_P} ${DESTDIR}${MAN8DIR}
+		${INSTALL_DATA} bond-dummy-enslave.8.gz ${DESTDIR}${MAN8DIR}/
+
+install-debian:	install-bond-dummy-enslave
+
+install-redhat:	install-ifup-dummy install-bond-dummy-add
+
+install:
+		if [ -f /etc/debian_version ] || [ -n "$$INSTALL_DEBIAN" ]; then \
+			if [ -z "$$SKIP_INSTALL_DEBIAN" ]; then \
+				${MAKE} install-debian; \
+			fi; \
+		fi
+		if [ -f /etc/redhat-release ] || [ -n "$$INSTALL_REDHAT" ]; then \
+			if [ -z "$$SKIP_INSTALL_REDHAT" ]; then \
+				${MAKE} install-redhat; \
+			fi; \
+		fi
 
 clean:
 		${RM} ${PROGS} ${MANPAGES}
@@ -79,4 +100,5 @@ clean:
 .PHONY:		\
 		install-ifup-dummy \
 		install-bond-dummy-add \
-		all install clean
+		install-bond-dummy-enslave \
+		all install install-debian install-redhat clean
