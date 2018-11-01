@@ -3,6 +3,7 @@
 ## 0.2.0 (not yet)
 
 - Rename the package to bond-dummy-utils.
+- Add the GPL-2 license text and license blurbs.
 - Add the bond-dummy-add and the bond-dummy-enslave utilities.
 - Conditionally install the proper set of utilities depending on
   the Linux distribution; may be overridden by setting any of
