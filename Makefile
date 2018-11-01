@@ -24,31 +24,59 @@
 # OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 # SUCH DAMAGE.
 
-PROG=		ifup-dummy
-SRC=		${PROG}.sh
+PROGS=		ifup-dummy bond-dummy-add
+MANPAGES=	bond-dummy-add.8.gz
 
+SBINDIR?=	/sbin
 SYSCONFDIR?=	/etc
 SYSCONFNETDIR?=	${SYSCONFDIR}/sysconfig/network-scripts
+MANDIR?=	/usr/share/man/man
+MAN8DIR?=	${MANDIR}8
 
 BINOWN?=	root
 BINGRP?=	root
 BINMODE?=	755
 
+SHAREOWN?=	${BINOWN}
+SHAREGRP?=	${BINGRP}
+SHAREMODE?=	644
+
 INSTALL?=	install
+GZIP?=		gzip -9 -n -c
 RM?=		rm -f
 FALSE?=		false
 MKDIR_P?=	mkdir -p
 
 INSTALL_SCRIPT?=	${INSTALL} -o ${BINOWN} -g ${BINGRP} -m ${BINMODE}
+INSTALL_DATA?=		${INSTALL} -o ${SHAREOWN} -g ${SHAREGRP} -m ${SHAREMODE}
 
-all:		${PROG}
+COPY_SCRIPT?=		${INSTALL} -m ${BINMODE}
 
-${PROG}:	${SRC}
-		${INSTALL} -m ${BINMODE} ${SRC} ${PROG} || (${RM} ${PROG}; ${FALSE})
+all:		${PROGS} ${MANPAGES}
 
-install:	all
+%:		%.sh
+		${COPY_SCRIPT} $< $@ || (${RM} $@; ${FALSE})
+
+%.8.gz:		%.8
+		${GZIP} $< > $@ || (${RM} $@; ${FALSE})
+
+install-ifup-dummy:	ifup-dummy
 		${MKDIR_P} ${DESTDIR}${SYSCONFNETDIR}
-		${INSTALL_SCRIPT} ${PROG} ${DESTDIR}${SYSCONFNETDIR}/
+		${INSTALL_SCRIPT} ifup-dummy ${DESTDIR}${SYSCONFNETDIR}/
+
+install-bond-dummy-add:	bond-dummy-add bond-dummy-add.8.gz
+		${MKDIR_P} ${DESTDIR}${SBINDIR}
+		${INSTALL_SCRIPT} bond-dummy-add ${DESTDIR}${SBINDIR}/
+
+		${MKDIR_P} ${DESTDIR}${MAN8DIR}
+		${INSTALL_DATA} bond-dummy-add.8.gz ${DESTDIR}${MAN8DIR}/
+
+install:	install-ifup-dummy install-bond-dummy-add
 
 clean:
-		${RM} ${PROG}
+		${RM} ${PROGS} ${MANPAGES}
+
+.PHONY:		\
+		install-ifup-dummy \
+		install-bond-dummy-add \
+		all install clean
