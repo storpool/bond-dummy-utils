@@ -1,6 +1,6 @@
 # Change log for bond-dummy-utils
 
-## 0.2.0 (not yet)
+## 0.2.0 (2018-11-01)
 
 - Rename the package to bond-dummy-utils.
 - Add the GPL-2 license text and license blurbs.
