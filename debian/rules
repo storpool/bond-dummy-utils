@@ -1,0 +1,13 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+override_dh_auto_install:
+	dh_auto_install -- INSTALL_DEBIAN=1 SKIP_INSTALL_REDHAT=1 \
+		INSTALL_SCRIPT='install -m 755' INSTALL_DATA='install -m 644'
+
+override_dh_installchangelogs:
+	dh_installchangelogs
+#	install -m 644 NEWS.md debian/bond-dummy-utils/usr/share/doc/bond-dummy-utils/NEWS
+
+%:
+	dh $@

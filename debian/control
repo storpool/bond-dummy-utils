@@ -1,0 +1,19 @@
+Source: bond-dummy-utils
+Section: admin
+Priority: optional
+Maintainer: Peter Pentchev <pp@storpool.com>
+Build-Depends: debhelper-compat (= 11)
+Standards-Version: 4.2.1
+Homepage: https://github.com/storpool/bond-dummy-utils
+Vcs-Git: https://github.com/storpool/bond-dummy-utils.git -b debian/sid
+Vcs-Browser: https://github.com/storpool/bond-dummy-utils/tree/debian/sid
+Rules-Requires-Root: no
+
+Package: bond-dummy-utils
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: utilities for adding dummy interfaces to bond ones
+ The bond-dummy-enslave utility makes sure that a dummy network interface
+ is added to a bond interface at the correct time; namely, after the initial
+ setup of the bond interface has been completed.

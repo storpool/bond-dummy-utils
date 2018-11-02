@@ -1,0 +1,5 @@
+bond-dummy-utils (0.2.0-1) UNRELEASED; urgency=low
+
+  * Initial release.
+
+ -- Peter Pentchev <pp@storpool.com>  Tue, 17 Mar 2009 18:10:35 +0200
