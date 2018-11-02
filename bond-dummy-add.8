@@ -1,0 +1,86 @@
+.\" Copyright (c) 2018  StorPool
+.\" All rights reserved.
+.\"
+.\" This program is free software; you can redistribute it and/or modify
+.\" it under the terms of the GNU General Public License, version 2,
+.\" as published by the Free Software Foundation.
+.\"
+.\" This program is distributed in the hope that it will be useful,
+.\" but WITHOUT ANY WARRANTY; without even the implied warranty of
+.\" MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+.\" GNU General Public License for more details.
+.\"
+.\" You should have received a copy of the GNU General Public License
+.\" along with this program; if not, write to the Free Software
+.\" Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+.\"
+.Dd November 1, 2018
+.Dt BOND-DUMMY-ADD 8
+.Os
+.Sh NAME
+.Nm bond-dummy-add
+.Nd add a dummy interface to a bond one when the latter is ready
+.Sh SYNOPSIS
+.Nm
+.Ar CONFIG
+.Sh DESCRIPTION
+The
+.Nm
+utility makes sure that a dummy network interface is added to
+a bond interface at the correct time; namely, after the initial setup of
+the bond interface has been completed.
+The
+.Nm
+utility is not meant to be started directly; it should be invoked from the
+.Pa /sbin/ifup-pre-local
+script started by the
+.Xr ifup 8
+tool as part of the system startup sequence or, later, if the dummy
+interface should be brought up (again) for any reason.
+The system administrator must make sure that the
+.Pa /sbin/ifup-pre-local
+script exists and that it invokes the
+.Nm
+utility and passes to it its own first argument - the interface
+configuration file name relative to the
+.Pa /etc/sysconfig/network-scripts/
+directory.
+.Sh ENVIRONMENT
+The operation of the
+.Nm
+utility is not directly influenced by any environment variables.
+.Sh FILES
+The
+.Nm
+utility determines the dummy interface configuration by reading
+the configuration file specified as its first argument from the
+.Pa /etc/sysconfig/network-scripts/
+directory.
+.Sh EXAMPLES
+The following line should be part of the
+.Pa /sbin/ifup-pre-local
+script:
+.Pp
+.Dl bond-dummy-add "$1"
+.Pp
+.Sh DIAGNOSTICS
+.Ex -std
+.Sh SEE ALSO
+.Xr ifup 8
+.Sh STANDARDS
+No standards were harmed during the production of the
+.Nm
+utility.
+.Sh HISTORY
+The
+.Nm
+utility was written as part of the
+.Tn StorPool
+distributed storage software in 2018.
+.Sh AUTHORS
+.An StorPool support
+.Aq support@storpool.com
+.Sh BUGS
+No, thank you :)
+But if you should actually find any, please report them to
+.Tn StorPool .
