@@ -1,3 +1,9 @@
+bond-dummy-utils (0.2.1-1) UNRELEASED; urgency=medium
+
+  * New upstream release.
+
+ -- Peter Pentchev <pp@storpool.com>  Mon, 25 Feb 2019 17:07:45 +0200
+
 bond-dummy-utils (0.2.0-1) unstable; urgency=low
 
   * Initial release.
