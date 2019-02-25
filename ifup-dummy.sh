@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2018  StorPool
+# Copyright (c) 2018, 2019  StorPool
 # All rights reserved.
 #
 # This program is free software; you can redistribute it and/or modify
@@ -33,6 +33,10 @@ CONFIG=${1}
 need_config "${CONFIG}"
 
 source_config
+
+if [[ -z $NAME ]]; then
+	NAME="${DEVICE}"
+fi
 
 ip link add $NAME type dummy
 

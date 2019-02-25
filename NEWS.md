@@ -1,5 +1,10 @@
 # Change log for bond-dummy-utils
 
+## 0.2.1 (2019-02-25)
+
+- Fix an ifup-dummy bug when NAME is not specified in
+  the configuration, but DEVICE is.
+
 ## 0.2.0 (2018-11-01)
 
 - Rename the package to bond-dummy-utils.
