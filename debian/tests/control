@@ -1,0 +1,2 @@
+Test-Command: adequate bond-dummy-utils
+Depends: @, adequate
