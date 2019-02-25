@@ -1,8 +1,13 @@
-bond-dummy-utils (0.2.1-1) UNRELEASED; urgency=medium
+bond-dummy-utils (0.2.1-1) unstable; urgency=medium
 
   * New upstream release.
+  * Declare compliance with Debian Policy 4.3.0 with no changes.
+  * Minimize the upstream signing key.
+  * Bump the debhelper compatibility level to 12 with no changes.
+  * Add a trivial adequate autopkgtest.
+  * Add a simple git-buildpackage config file.
 
- -- Peter Pentchev <pp@storpool.com>  Mon, 25 Feb 2019 17:07:45 +0200
+ -- Peter Pentchev <pp@storpool.com>  Mon, 25 Feb 2019 18:07:16 +0200
 
 bond-dummy-utils (0.2.0-1) unstable; urgency=low
 
