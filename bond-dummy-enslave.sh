@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Copyright (c) 2018  StorPool
+# Copyright (c) 2018, 2021  StorPool
 # All rights reserved.
 #
 # This program is free software; you can redistribute it and/or modify
@@ -20,6 +20,8 @@
 # package which carry the following copyright notice:
 #
 # Copyright (c) 1996-2014 Red Hat, Inc. all rights reserved.
+
+set -e
 
 bond="$1"
 dummyname="$2"
