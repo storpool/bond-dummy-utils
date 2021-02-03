@@ -26,18 +26,21 @@ set -e
 bond="$1"
 dummyname="$2"
 
-/sbin/ip link add "$bond" type bond
-/sbin/ip link add "$dummyname" type dummy
-/sbin/ip link set "$dummyname" up
+if [ ! -d "/sys/class/net/$bond" ]; then
+	/sbin/ip link add "$bond" type bond
+fi
 
-count=0
-while [ ! -f "/run/network/ifenslave.${bond}" ]; do
-	sleep 1
-	count=$((count+1))
-	if [ "$count" -gt 300 ]; then
-		echo 'Waited for more than 5 minutes, bailing out' 1>&2
-		break
+if [ ! -d "/sys/class/net/$dummyname" ]; then
+	/sbin/ip link add "$dummyname" type dummy
+fi
+
+master_path="$(readlink "/sys/class/net/$dummyname/master" 2>/dev/null || true)"
+if [ -n "$master_path" ]; then
+	master_device="$(basename -- "$master_path")"
+	if [ "$master_device" != "$bond" ]; then
+		echo "The $dummyname device already has a master device: $master_device" 1>&2
+		exit 1
 	fi
-done
-
-/sbin/ifenslave "$bond" "$dummyname"
+else
+	/sbin/ip link set "$dummyname" master "$bond"
+fi
