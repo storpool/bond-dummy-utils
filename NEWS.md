@@ -1,6 +1,11 @@
 # Change log for bond-dummy-utils
 
 ## 0.3.0 (not yet)
+- Teach bond-dummy-enslave to using iproute2 to enslave interfaces
+  instead of the obsolete ifenslave tool.
+- Make bond-dummy-enslave a bit more resilient if some interfaces have
+  already been created.
+- Make bond-dummy-enslave exit on errors.
 
 ## 0.2.1 (2019-02-25)
 
