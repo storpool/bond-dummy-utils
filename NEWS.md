@@ -1,5 +1,10 @@
 # Change log for bond-dummy-utils
 
+## 0.3.1 (2021-02-16)
+- Do not try to bring the bond interface up in bond-dummy-enslave:
+  it is almost certain that we will not initialize it with the correct
+  configuration. Reintroduce the wait loop instead.
+
 ## 0.3.0 (2021-02-03)
 - Teach bond-dummy-enslave to using iproute2 to enslave interfaces
   instead of the obsolete ifenslave tool.

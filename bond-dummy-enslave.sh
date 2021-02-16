@@ -27,7 +27,16 @@ bond="$1"
 dummyname="$2"
 
 if [ ! -d "/sys/class/net/$bond" ]; then
-	/sbin/ip link add "$bond" type bond
+	echo "$dummyname: waiting 60 seconds for $bond to appear" 1>&2
+	count=0
+	while [ ! -d "/sys/class/net/$bond" ]; do
+		sleep 0.1
+		count="$((count + 1))"
+		if [ "$count" -gt 600 ]; then
+			echo "$dummyname: the $bond interface is still not up after 60 seconds, proceeding anyway" 1>&2
+			break
+		fi
+	done
 fi
 
 if [ ! -d "/sys/class/net/$dummyname" ]; then
