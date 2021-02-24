@@ -1,5 +1,9 @@
 # Change log for bond-dummy-utils
 
+## 0.3.2 (2021-02-24)
+
+- Use the sysfs directory for the slave device directly in ifup-dummy.
+
 ## 0.3.1 (2021-02-16)
 - Do not try to bring the bond interface up in bond-dummy-enslave:
   it is almost certain that we will not initialize it with the correct

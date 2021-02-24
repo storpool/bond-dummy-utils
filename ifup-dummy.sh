@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2018, 2019  StorPool
+# Copyright (c) 2018 - 2021  StorPool
 # All rights reserved.
 #
 # This program is free software; you can redistribute it and/or modify
@@ -45,7 +45,7 @@ if [ "${SLAVE}" = yes -a "${ISALIAS}" = no -a "${MASTER}" != "" ]; then
 	grep -wq "${DEVICE}" /sys/class/net/${MASTER}/bonding/slaves 2>/dev/null || {
 		/sbin/ip link set dev ${DEVICE} down
 		echo "+${DEVICE}" > /sys/class/net/${MASTER}/bonding/slaves 2>/dev/null
-		echo 0 > /sys/class/net/${MASTER}/slave_${DEVICE}/carrier
+		echo 0 > /sys/class/net/${DEVICE}/carrier
 	}
 
 	exit 0
