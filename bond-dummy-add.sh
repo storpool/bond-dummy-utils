@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Copyright (c) 2018  StorPool
+# Copyright (c) 2018, 2021  StorPool
 # All rights reserved.
 #
 # This program is free software; you can redistribute it and/or modify
