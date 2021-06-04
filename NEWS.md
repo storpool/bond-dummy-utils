@@ -1,6 +1,6 @@
 # Change log for bond-dummy-utils
 
-## 0.3.3 (not yet)
+## 0.3.3 (2021-06-04)
 
 - Make sure that the dummy interface's carrier is disabled.
 
