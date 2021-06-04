@@ -48,6 +48,7 @@ if [ "${SLAVE}" = yes -a "${ISALIAS}" = no -a "${MASTER}" != "" ]; then
 		if [ "$DUMMYNAME" = "$NAME" ]; then
 			continue
 		fi
+		echo 0 > "/sys/class/net/${DUMMYNAME}/carrier"
 		/sbin/ifup "$DUMMYNAME"
 	done
 fi
