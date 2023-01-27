@@ -51,6 +51,7 @@ if [ -n "$master_path" ]; then
 		exit 1
 	fi
 else
-	echo 0 > "/sys/class/net/${dummyname}/carrier"
+	echo 0 > "/sys/class/net/${dummyname}/carrier" || true
 	/sbin/ip link set "$dummyname" master "$bond"
+	echo 0 > "/sys/class/net/${dummyname}/carrier" || true
 fi
